@@ -4,13 +4,17 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
+import { SupabaseAuthProvider } from "./contexts/SupabaseAuthContext";
+import Login from "./pages/Login";
+import DeleteRequest from "./pages/DeleteRequest";
+import Confirmation from "./pages/Confirmation";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"} component={Login} />
+      <Route path={"/request"} component={DeleteRequest} />
+      <Route path={"/confirmation"} component={Confirmation} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
@@ -26,14 +30,13 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+      <ThemeProvider defaultTheme="light">
+        <SupabaseAuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </SupabaseAuthProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
