@@ -108,3 +108,7 @@ temp/
 
 # Webdev artifacts (checkpoint zips, migrations, etc.)
 .webdev/
+
+# Firebase credentials (NEVER commit these)
+firebase-adminsdk-*.json
+*-adminsdk-*.json
