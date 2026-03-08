@@ -40,3 +40,12 @@
 - [x] Provide SQL schema for vk_delete_requests table
 - [ ] Expose live preview URL
 - [ ] Deliver project to user
+
+
+## Phase 7: Design Refinement & JWT Improvements
+- [x] Update color scheme to match logo background (dark purple header, dark purple page background)
+- [x] Adjust element colors to work with new dark theme
+- [x] Implement automatic JWT token handling from URL query parameter
+- [x] Remove explicit JWT token input field
+- [x] Test JWT auto-login flow
+- [x] Verify responsive design with new color scheme
