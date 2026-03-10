@@ -5,16 +5,16 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { SupabaseAuthProvider } from "./contexts/SupabaseAuthContext";
-import Login from "./pages/Login";
-import DeleteRequest from "./pages/DeleteRequest";
+import Home from "./pages/Home";
+import DeleteRequestPage from "./pages/DeleteRequestPage";
 import Confirmation from "./pages/Confirmation";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Login} />
-      <Route path={"/request"} component={DeleteRequest} />
+      <Route path={"/"} component={Home} />
+      <Route path={"/deleterequest"} component={DeleteRequestPage} />
       <Route path={"/confirmation"} component={Confirmation} />
       <Route path={"/privacypolicy"} component={PrivacyPolicy} />
       <Route path={"/404"} component={NotFound} />
