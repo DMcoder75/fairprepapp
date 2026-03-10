@@ -8,6 +8,7 @@ import { SupabaseAuthProvider } from "./contexts/SupabaseAuthContext";
 import Login from "./pages/Login";
 import DeleteRequest from "./pages/DeleteRequest";
 import Confirmation from "./pages/Confirmation";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
       <Route path={"/"} component={Login} />
       <Route path={"/request"} component={DeleteRequest} />
       <Route path={"/confirmation"} component={Confirmation} />
+      <Route path={"/privacypolicy"} component={PrivacyPolicy} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

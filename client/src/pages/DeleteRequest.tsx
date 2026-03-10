@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +10,7 @@ import { Loader2, ArrowLeft } from "lucide-react";
 import { useSupabaseAuthContext } from "@/contexts/SupabaseAuthContext";
 import { FAIRPREP_BRANDING, DELETE_REQUEST_REASONS } from "@shared/branding";
 import { signOut } from "@/lib/supabase";
+import { submitDeletionRequest } from "@shared/cloudFunctionConfig";
 
 export default function DeleteRequest() {
   const [, setLocation] = useLocation();
@@ -22,10 +23,11 @@ export default function DeleteRequest() {
   const [error, setError] = useState<string | null>(null);
 
   // Redirect if not authenticated
-  if (!authLoading && !user) {
-    setLocation("/");
-    return null;
-  }
+  useEffect(() => {
+    if (!authLoading && !user) {
+      setLocation("/");
+    }
+  }, [authLoading, user, setLocation]);
 
   if (authLoading) {
     return (
@@ -44,7 +46,7 @@ export default function DeleteRequest() {
   const handleLogout = async () => {
     try {
       await signOut();
-      setLocation("/");
+      setTimeout(() => setLocation("/"), 100);
     } catch (err) {
       console.error("Logout failed:", err);
     }
@@ -74,25 +76,13 @@ export default function DeleteRequest() {
     setError(null);
 
     try {
-      // Submit the deletion request via tRPC
-      const response = await fetch("/api/trpc/deleteRequest.submitRequest", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          json: {
-            userId: user!.id,
-            email: user!.email,
-            reason: selectedReason,
-            otherReasonDetail: selectedReason === "Other reason" ? otherReasonDetail : undefined,
-          },
-        }),
+      // Submit the deletion request to Cloud Function
+      await submitDeletionRequest({
+        userId: user!.id,
+        email: user!.email || "",
+        reason: selectedReason,
+        otherReasonDetail: selectedReason === "Other reason" ? otherReasonDetail : undefined,
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit deletion request");
-      }
 
       // Save state to sessionStorage before redirecting
       sessionStorage.setItem(
