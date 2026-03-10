@@ -97,6 +97,17 @@ export default function Home() {
             <Button
               variant="outline"
               size="sm"
+              onClick={() => setLocation("/deleterequest")}
+              style={{
+                borderColor: FAIRPREP_BRANDING.colors.primary,
+                color: FAIRPREP_BRANDING.colors.primary,
+              }}
+            >
+              Delete Request
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
               onClick={() => setLocation("/privacypolicy")}
               style={{
                 borderColor: FAIRPREP_BRANDING.colors.primary,
@@ -142,14 +153,14 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button
               size="lg"
-              onClick={() => setLocation("/deleterequest")}
+              onClick={() => window.open('https://play.google.com/store/apps/details?id=com.fairprep', '_blank')}
               style={{
                 backgroundColor: FAIRPREP_BRANDING.colors.primary,
                 color: FAIRPREP_BRANDING.colors.text,
               }}
               className="hover:opacity-90"
             >
-              Get Started
+              Download app from PlayStore
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
@@ -477,14 +488,14 @@ export default function Home() {
 
           <Button
             size="lg"
-            onClick={() => setLocation("/deleterequest")}
+            onClick={() => window.open('https://play.google.com/store/apps/details?id=com.fairprep', '_blank')}
             style={{
               backgroundColor: FAIRPREP_BRANDING.colors.primary,
               color: FAIRPREP_BRANDING.colors.text,
             }}
             className="hover:opacity-90"
           >
-            Get Started Now
+            Download app from PlayStore
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
